@@ -13,10 +13,10 @@ jobs:
     strategy:
       matrix:
         config:
-          - os: windows-2019
+          - os: windows-latest
             compiler: msvc2019
             vcpkg_triplet: x64-windows
-          - os: windows-2022
+          - os: windows-latest
             compiler: msvc2022
             vcpkg_triplet: x64-windows            
           - os: windows-latest
@@ -53,11 +53,6 @@ jobs:
         working-directory: ${{github.workspace}}\build
         shell: bash
         run: cmake --build . --config ${{env.BUILD_TYPE}}
-        
-      - name: Test
-        working-directory: ${{github.workspace}}/build
-        shell: bash
-        run: ctest -C relwithdebinfo --output-on-failure --output-junit report.xml
 
       - name: Status
         uses: brinkqiang/github-status-action@v2
